@@ -1,0 +1,201 @@
+TODO
+°°°°
+=> add technical doc: explanations or in javadoc
+=> if tech doc new menu or manual section?
+=> Licence bug: replace <ORGANIZATION> with JL?
+=> dates in java code => uk dates
+=> enhancements: 
+      1- GUI recorder start/stop, repository selection
+      2- appliaction mode (better term?)
+        -> ResultSet never changes for all the queries (BlindResultSet)
+        -> Concurrent changes, by other apps, test people garantee the replay
+        -> SelfResultModifier: auto triggered, API triggered (...)
+      3- Sequencer
+        -> NullSequencer (no sequencer, like current version)
+        -> StrictSequencer 
+           * smart mode, check if changed after RUD + detect
+             table that may change + check if result changed
+           * normal/default mode check every result set if it matches
+             previous result
+        -> InteractiveReplaySequencer 
+            GUI permettant de choisir le result set, de changer la séquence,
+            ou de donner les réultats (input form) si on ne trouve pas
+           *** alternative ***
+            InterractiveSequencer, while recording data may be input or
+            fetched from db or fetched and the modified
+=> avantage du code actuel: grâce au fait qu'on utilise les SQL sous forme
+  canonique et qu'on ne garde pas de séquence (=> avantage du 
+  NullSequencer) si le programme change l'ordre des select ou le text SQL
+  sans changer la sémantique on ne doit pas changer les données de test
+=> replace "straight" with HSQL
+=> Store use jakarta.file (???)
+=> add an easier interface JDBCUnit like:
+           > JDBCUnist.record("repository.zip/testcase1.csv");
+           > JDBCUnist.record("repository/testcase1.csv");
+=> record Exception (user reflexion to rebuild exception objects)
+=> recording insert/update must add a "layer" notion:
+   <start recording> layer 0
+       select(s) - in layer 0
+       update/insert/delete => layer++
+       select(s) - in layer 1
+       ...    
+=> use case debugging failing application
+=> remove dependency with straight for the code
+=> MutlitrackRecorder (useful?)
+=> test CSVMedia
+    [
+      /store at the same place multiple recordings
+    ]
+
+=> Media must be open to be able to record, add tests!
+         if writing new track, newTrack close / can write row if in new track?? /  what about close? - CSV is WRONG
+         openign an open media is ok
+
+=> publish [add javadoc, remove bad code, all dates to English, reorder tests, ??]
+	 
+=> Store Project
+	* When JavaFile is initialized from a physical structure, if a child is a zip 
+	  file create a ZipStore object instead of a JavaFile
+	* store.remove(child) is dangerous?
+	* JavaFile.remove(child) does it remove from physical storage?   
+
+=> SQL statements are "key" to access result sets, what about beeing able to do next:
+   Always return ["My name", "My birth date" , ...] if the query is "SELECT * FROM
+   people WHERE ID=?"
+
+   Sql key generator so,
+
+   select * from people order by name => select * from people
+   (here we don't care about sorting, this can cause problems of course)
+
+   select * from people where age = 23 => select * from people where age = 
+   (here we don't care about the criteria value, whatever is the wanted age 
+   we always return the same recored value)
+
+=> sql key generator so,
+ 
+ select * from people order by name => select * from people
+ (here we don't care about sorting, this can cause problems of course)
+ 
+ select * from people where age = 23 => select * from people where age = 
+ (here we don't care about the criteria value, whatever is the wanted age 
+ we always return the same recored value)
+
+
+Development Order
+°°°°°°°°°°°°°°°°°
+CSV
+PreparedStatement
+ZIP (use ZipStore)
+MediaStack
+TraceMedia/CompositeMedia
+XML
+Swing
+
+Version 1.0
+°°°°°°°°°°°
+=> Media, CSVMedia
+=> MemoryResultSet does not complain if no call to "next()" was done
+
+> Recorder uses a Media where the recorded result sets are written to.
+Several media can be created: CSV, XML, ZIP (decorator for other media), Trace, Composite.
+The media concept is a analogy to sound recording systems, so are the tack concept 
+an analogy to each query result. The reason for keeping this analogy is because we 
+can go on with concepts like multiple tracks, meaning merging (mixing) several result set
+for the same query, overwritting results sets (overdubbing).
+
+> The goal of JDBCUnit is based on the acceptance tests needs, borned on a project where
+a BA agreed with a version of the application, simplicity and easy to use, able to change
+the data so CSV is a good solution, one can open with a spreadsheet, modify and save
+back to CSV.
+
+Version 1.1
+°°°°°°°°°°°
+=> MediaStack
+=> Publish
+
+Version 1.x or 2.x
+°°°°°°°°°°°°°°°°°°
+=> XMLMedia, TraceMedia, CompositeMedia, 
+
+Reuse already recorded stuffs, with a MediaStack, where the topmost Media is the one 
+where new recorded sets are written and, while replaying, the result are searched in the 
+stack... in reverse order (?) / Another name for MediaStack could be JukeboxMedia, with
+one recordable media
+
+If we reuse Media, what about overdubbing, mixing and muting tracks...
+
+Recording on a media that already contains a result set could be: don't replace, replace
+append.
+
+Record updates, inserts and deletes.
+
+Version 2.x
+°°°°°°°°°°°
+
+Swing/AWT record, stop, playback console + save as, load from
+Integrate into Marathon
+
+________________________________________________
+
+Done
+°°°°
+2004-02-24 => TestJDBCUnitSequence [recording/replaying/recording+replaying/error record+replay without start]
+2004-02-24 => recording key must be dbURL + SQLStatement
+2004-02-27 => CSV format should include '"' because of cases like "... ORDER BY A, B"
+2004-02-27 => warn if jdbc operation is not recorded
+2004-02-27 => create Store -> JavaFile + MemoryStore
+2004-02-29 => CSVMedia should write TOC to the given store and all the files in the dir where TOC file is written
+2004-03-01 => the SQL must be converted to a canonical form to be used as a key
+2004-03-01 => writing null values in csv files must be <null>, not <"null">
+2004-03-01 => MemoryResultSet must use string to create the BigDecimal values
+2004-03-02 => test not all the csv file is loaded in memory when replaying
+2004-03-05 => support for PreparedStatement
+2004-04-02 => Store test conformance API
+2004-04-09 => CSV format should escape '"' character if present (ex. [My "class"] should be saved as ["My ""class"""]
+2004-04-10 => move store stuffs to a "store" package and hashtables to "straight"
+2004-04-12 => TestCSVMedia [delete]
+2004-04-12 => MediaStack
+2004-05-21 => Add InputStream/OuputStream access to Store so that one can use binary files, as Reader/Writer don't! (Change Store interface)
+2004-11-08 => print image, support updates, publish (code w/ licence), to do, mailing lists instead of e-mail,
+
+
+2004-04-10 => split projects : Store + Straight (HashDatabase)
+	 *     Common -> util
+	 *     Store
+	 *     Straight
+
+________________________________________________
+
+public interface ResultPersister {
+  ResultSet load(String dbUrl, String key);
+  void save(String dbUrl, String key);
+}
+
+/**
+  * Persist all the recorded result sets in one XML file
+  */
+public class OneFilePersister {
+  ResultSet load(String dbUrl, String key) {
+  }
+
+  void save(String dbUrl, String key) {
+  }
+}
+
+public class RecorderComposite implements Recorder {
+  public void add(Recorder recorder) {
+  }
+  ...
+}
+
+public class TraceRecorder implements Recorder {
+  public void add(SQLEvent event) {
+  System.err.println("key is : " + event.getKey());
+  System.err.println("sql is : " + event.getSQL());
+
+  System.err.println("Result is : ");
+
+  // loop through event.getResultSet()
+  }
+}
