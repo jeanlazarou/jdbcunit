@@ -138,7 +138,7 @@ class MockDriver implements Driver {
 		return false;
 	}
 
-	@Override
+	//---- JDBC 4.0
 	public Logger getParentLogger() throws SQLFeatureNotSupportedException {
 		throw new SQLFeatureNotSupportedException();
 	}

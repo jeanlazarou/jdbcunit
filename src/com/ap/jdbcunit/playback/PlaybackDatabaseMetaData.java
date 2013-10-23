@@ -707,60 +707,60 @@ public class PlaybackDatabaseMetaData implements DatabaseMetaData {
 		throw new UnsupportedOperationException();
 	}
 
-	@Override
+	//---- JDBC 4.0
 	public <T> T unwrap(Class<T> iface) throws SQLException {
 	
 		throw new UnsupportedOperationException();
 	}
 
-	@Override
+	//---- JDBC 4.0
 	public boolean isWrapperFor(Class<?> iface) throws SQLException {
 		throw new UnsupportedOperationException();
 	}
 
-	@Override
+	//---- JDBC 4.0
 	public RowIdLifetime getRowIdLifetime() throws SQLException {
 		throw new UnsupportedOperationException();
 	}
 
-	@Override
+	//---- JDBC 4.0
 	public ResultSet getSchemas(String catalog, String schemaPattern) throws SQLException {
 		throw new UnsupportedOperationException();
 	}
 
-	@Override
+	//---- JDBC 4.0
 	public boolean supportsStoredFunctionsUsingCallSyntax() throws SQLException {
 		throw new UnsupportedOperationException();
 	}
 
-	@Override
+	//---- JDBC 4.0
 	public boolean autoCommitFailureClosesAllResultSets() throws SQLException {
 		throw new UnsupportedOperationException();
 	}
 
-	@Override
+	//---- JDBC 4.0
 	public ResultSet getClientInfoProperties() throws SQLException {
 		throw new UnsupportedOperationException();
 	}
 
-	@Override
+	//---- JDBC 4.0
 	public ResultSet getFunctions(String catalog, String schemaPattern, String functionNamePattern) throws SQLException {
 		throw new UnsupportedOperationException();
 	}
 
-	@Override
+	//---- JDBC 4.0
 	public ResultSet getFunctionColumns(String catalog, String schemaPattern, String functionNamePattern,
 			String columnNamePattern) throws SQLException {
 		throw new UnsupportedOperationException();
 	}
 
-	@Override
+	//---- JDBC 4.0
 	public ResultSet getPseudoColumns(String catalog, String schemaPattern, String tableNamePattern,
 			String columnNamePattern) throws SQLException {
 		throw new UnsupportedOperationException();
 	}
 
-	@Override
+	//---- JDBC 4.0
 	public boolean generatedKeyAlwaysReturned() throws SQLException {
 		throw new UnsupportedOperationException();
 	}

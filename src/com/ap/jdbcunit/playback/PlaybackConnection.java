@@ -177,107 +177,107 @@ public class PlaybackConnection implements Connection {
 		throw new UnsupportedOperationException();
 	}
 
-	@Override
+	//---- JDBC 4.0
 	public <T> T unwrap(Class<T> iface) throws SQLException {
 		throw new UnsupportedOperationException();
 		
 	}
 
-	@Override
+	//---- JDBC 4.0
 	public boolean isWrapperFor(Class<?> iface) throws SQLException {
 		throw new UnsupportedOperationException();
 	}
 
-	@Override
+	//---- JDBC 4.0
 	public Clob createClob() throws SQLException {
 		throw new UnsupportedOperationException();
 		
 	}
 
-	@Override
+	//---- JDBC 4.0
 	public Blob createBlob() throws SQLException {
 		throw new UnsupportedOperationException();
 		
 	}
 
-	@Override
+	//---- JDBC 4.0
 	public NClob createNClob() throws SQLException {
 		throw new UnsupportedOperationException();
 		
 	}
 
-	@Override
+	//---- JDBC 4.0
 	public SQLXML createSQLXML() throws SQLException {
 		throw new UnsupportedOperationException();
 		
 	}
 
-	@Override
+	//---- JDBC 4.0
 	public boolean isValid(int timeout) throws SQLException {
 		throw new UnsupportedOperationException();
 	}
 
-	@Override
+	//---- JDBC 4.0
 	public void setClientInfo(String name, String value) throws SQLClientInfoException {
 		throw new UnsupportedOperationException();
 		
 	}
 
-	@Override
+	//---- JDBC 4.0
 	public void setClientInfo(Properties properties) throws SQLClientInfoException {
 		throw new UnsupportedOperationException();
 		
 	}
 
-	@Override
+	//---- JDBC 4.0
 	public String getClientInfo(String name) throws SQLException {
 		throw new UnsupportedOperationException();
 		
 	}
 
-	@Override
+	//---- JDBC 4.0
 	public Properties getClientInfo() throws SQLException {
 		throw new UnsupportedOperationException();
 		
 	}
 
-	@Override
+	//---- JDBC 4.0
 	public Array createArrayOf(String typeName, Object[] elements) throws SQLException {
 		throw new UnsupportedOperationException();
 		
 	}
 
-	@Override
+	//---- JDBC 4.0
 	public Struct createStruct(String typeName, Object[] attributes) throws SQLException {
 		throw new UnsupportedOperationException();
 		
 	}
 
-	@Override
+	//---- JDBC 4.0
 	public void setSchema(String schema) throws SQLException {
 		throw new UnsupportedOperationException();
 		
 	}
 
-	@Override
+	//---- JDBC 4.0
 	public String getSchema() throws SQLException {
 		throw new UnsupportedOperationException();
 		
 	}
 
-	@Override
+	//---- JDBC 4.0
 	public void abort(Executor executor) throws SQLException {
 		throw new UnsupportedOperationException();
 		
 	}
 
-	@Override
+	//---- JDBC 4.0
 	public void setNetworkTimeout(Executor executor, int milliseconds) throws SQLException {
 		throw new UnsupportedOperationException();
 		
 	}
 
-	@Override
+	//---- JDBC 4.0
 	public int getNetworkTimeout() throws SQLException {
 		throw new UnsupportedOperationException();
 		

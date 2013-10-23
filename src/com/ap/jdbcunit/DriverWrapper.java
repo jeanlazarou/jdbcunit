@@ -91,7 +91,7 @@ public class DriverWrapper implements Driver {
 	
     static List registry = new ArrayList();
     
-    @Override
+    //---- JDBC 4.0
 	public Logger getParentLogger() throws SQLFeatureNotSupportedException {
 		throw new SQLFeatureNotSupportedException();
 	}

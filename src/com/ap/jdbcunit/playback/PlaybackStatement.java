@@ -163,37 +163,37 @@ public class PlaybackStatement implements Statement {
 		throw new UnsupportedOperationException();
 	}
 
-	@Override
+	//---- JDBC 4.0
 	public <T> T unwrap(Class<T> iface) throws SQLException {
 		throw new UnsupportedOperationException();
 	}
 
-	@Override
+	//---- JDBC 4.0
 	public boolean isWrapperFor(Class<?> iface) throws SQLException {
 		throw new UnsupportedOperationException();
 	}
 
-	@Override
+	//---- JDBC 4.0
 	public boolean isClosed() throws SQLException {
 		throw new UnsupportedOperationException();
 	}
 
-	@Override
+	//---- JDBC 4.0
 	public void setPoolable(boolean poolable) throws SQLException {
 		throw new UnsupportedOperationException();
 	}
 
-	@Override
+	//---- JDBC 4.0
 	public boolean isPoolable() throws SQLException {
 		throw new UnsupportedOperationException();
 	}
 
-	@Override
+	//---- JDBC 4.0
 	public void closeOnCompletion() throws SQLException {
 		throw new UnsupportedOperationException();
 	}
 
-	@Override
+	//---- JDBC 4.0
 	public boolean isCloseOnCompletion() throws SQLException {
 		throw new UnsupportedOperationException();
 	}
