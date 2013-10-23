@@ -1,16 +1,16 @@
 /*
  * @author: Jean Lazarou
- * @date: 15 févr. 04
+ * @date: 15 fevr. 04
  */
 package com.ap.jdbcunit;
 
 import java.util.List;
 import java.util.ArrayList;
-
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
 
 import com.ap.straight.MemoryResultSet;
 import com.ap.straight.SQL;
@@ -61,7 +61,13 @@ public class MediaRecorder implements Recorder {
 				List row = new ArrayList(n);
 
 				for (int i = 1; i <= n; i++) {
-					row.add(rs.getObject(i));
+					if (Types.DATE == meta.getColumnType(i) || Types.TIMESTAMP == meta.getColumnType(i)) {
+						row.add(rs.getTimestamp(i));
+					} else if (Types.VARCHAR == meta.getColumnType(i)) {
+						row.add(getNormalizedString(rs.getString(i)));
+					} else {
+						row.add(rs.getObject(i));
+					}
 				}
 
 				media.write(row);
@@ -75,6 +81,10 @@ public class MediaRecorder implements Recorder {
 		}
     }
 
+    private String getNormalizedString(String value){
+    	return value != null ? value.replaceAll("\n", "") : value;
+    }
+    
 	public ResultSet get(Statement stmt, String dbURL, String sql) {
 		return new MemoryResultSet(stmt, media.getTrack(dbURL, SQL.normalize(sql)));
 	}
