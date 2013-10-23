@@ -7,6 +7,7 @@ package com.ap.jdbcunit.playback;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
+import java.sql.RowIdLifetime;
 import java.sql.SQLException;
 
 public class PlaybackDatabaseMetaData implements DatabaseMetaData {
@@ -703,6 +704,64 @@ public class PlaybackDatabaseMetaData implements DatabaseMetaData {
 	}
 
 	public ResultSet getAttributes(String catalog, String schemaPattern, String typeNamePattern, String attributeNamePattern) throws SQLException {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public <T> T unwrap(Class<T> iface) throws SQLException {
+	
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public boolean isWrapperFor(Class<?> iface) throws SQLException {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public RowIdLifetime getRowIdLifetime() throws SQLException {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public ResultSet getSchemas(String catalog, String schemaPattern) throws SQLException {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public boolean supportsStoredFunctionsUsingCallSyntax() throws SQLException {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public boolean autoCommitFailureClosesAllResultSets() throws SQLException {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public ResultSet getClientInfoProperties() throws SQLException {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public ResultSet getFunctions(String catalog, String schemaPattern, String functionNamePattern) throws SQLException {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public ResultSet getFunctionColumns(String catalog, String schemaPattern, String functionNamePattern,
+			String columnNamePattern) throws SQLException {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public ResultSet getPseudoColumns(String catalog, String schemaPattern, String tableNamePattern,
+			String columnNamePattern) throws SQLException {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public boolean generatedKeyAlwaysReturned() throws SQLException {
 		throw new UnsupportedOperationException();
 	}
 
