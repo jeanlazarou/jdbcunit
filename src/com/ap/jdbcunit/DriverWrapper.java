@@ -13,11 +13,10 @@ import java.sql.SQLFeatureNotSupportedException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
-import java.util.Iterator;
 import java.util.Properties;
 import java.util.logging.Logger;
 
-import com.ap.jdbcunit.playback.PlaybackConnection;;
+import com.ap.jdbcunit.playback.PlaybackConnection;
 
 public class DriverWrapper implements Driver {
 
@@ -77,21 +76,21 @@ public class DriverWrapper implements Driver {
     }
 
 	private Driver getDriver(String url) throws SQLException {
-		
-		for (Iterator i = registry.iterator(); i.hasNext();) {
-			
-			Driver drv = (Driver) i.next();
-			
-			if (drv.acceptsURL(url)) {
-				return drv;
-			}
-		}
+
+        for (Driver drv : registry) {
+
+            if (drv.acceptsURL(url)) {
+                return drv;
+            }
+        }
+
 		return null;		
 	}
 	
-    static List registry = new ArrayList();
-    
-    //---- JDBC 4.0
+    static List<Driver> registry = new ArrayList<>();
+
+    //------------------------- JDBC 4.1 -----------------------------------
+
 	public Logger getParentLogger() throws SQLFeatureNotSupportedException {
 		throw new SQLFeatureNotSupportedException();
 	}

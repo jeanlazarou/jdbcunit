@@ -40,8 +40,8 @@ public class CallableStatementWrapper extends PreparedStatementWrapper implement
 		this.actualStatement = (CallableStatement) actualStatement;
 		this.sql = sql;
 		this.connection = con;
-		this.rows = new ArrayList<String>(3);
-		this.values = new ArrayList<Object>(3);
+		this.rows = new ArrayList<>(3);
+		this.values = new ArrayList<>(3);
 	}
 
 	
@@ -221,16 +221,6 @@ public class CallableStatementWrapper extends PreparedStatementWrapper implement
 	
 	public boolean isCloseOnCompletion() throws SQLException {
 		return actualStatement.isCloseOnCompletion();
-	}
-
-	
-	public <T> T unwrap(Class<T> iface) throws SQLException {
-		return actualStatement.unwrap(iface);
-	}
-
-	
-	public boolean isWrapperFor(Class<?> iface) throws SQLException {
-		return actualStatement.isWrapperFor(iface);
 	}
 
 	
@@ -680,195 +670,176 @@ public class CallableStatementWrapper extends PreparedStatementWrapper implement
 
 	}
 
-	//---- JDBC 4.0
+    //------------------------- JDBC 4.0 -----------------------------------
+
 	public RowId getRowId(int parameterIndex) throws SQLException {
 		throw new UnsupportedOperationException();
 
 	}
 
-	//---- JDBC 4.0
 	public RowId getRowId(String parameterName) throws SQLException {
 		throw new UnsupportedOperationException();
 
 	}
 
-	//---- JDBC 4.0
 	public void setRowId(String parameterName, RowId x) throws SQLException {
 		throw new UnsupportedOperationException();
 
 	}
 
-	//---- JDBC 4.0
 	public void setNString(String parameterName, String value) throws SQLException {
 		throw new UnsupportedOperationException();
 
 	}
 
-	//---- JDBC 4.0
 	public void setNCharacterStream(String parameterName, Reader value, long length) throws SQLException {
 		throw new UnsupportedOperationException();
 
 	}
 
-	//---- JDBC 4.0
 	public void setNClob(String parameterName, NClob value) throws SQLException {
 		throw new UnsupportedOperationException();
 
 	}
 
-	//---- JDBC 4.0
 	public void setClob(String parameterName, Reader reader, long length) throws SQLException {
 		throw new UnsupportedOperationException();
 
 	}
 
-	//---- JDBC 4.0
 	public void setBlob(String parameterName, InputStream inputStream, long length) throws SQLException {
 		throw new UnsupportedOperationException();
 
 	}
 
-	//---- JDBC 4.0
 	public void setNClob(String parameterName, Reader reader, long length) throws SQLException {
 		throw new UnsupportedOperationException();
 
 	}
 
-	//---- JDBC 4.0
 	public NClob getNClob(int parameterIndex) throws SQLException {
 		throw new UnsupportedOperationException();
 
 	}
 
-	//---- JDBC 4.0
 	public NClob getNClob(String parameterName) throws SQLException {
 		throw new UnsupportedOperationException();
 
 	}
 
-	//---- JDBC 4.0
 	public void setSQLXML(String parameterName, SQLXML xmlObject) throws SQLException {
 		throw new UnsupportedOperationException();
 
 	}
 
-	//---- JDBC 4.0
 	public SQLXML getSQLXML(int parameterIndex) throws SQLException {
 		throw new UnsupportedOperationException();
 
 	}
 
-	//---- JDBC 4.0
 	public SQLXML getSQLXML(String parameterName) throws SQLException {
 		throw new UnsupportedOperationException();
 
 	}
 
-	//---- JDBC 4.0
 	public String getNString(int parameterIndex) throws SQLException {
 		throw new UnsupportedOperationException();
 
 	}
 
-	//---- JDBC 4.0
 	public String getNString(String parameterName) throws SQLException {
 		throw new UnsupportedOperationException();
 
 	}
 
-	//---- JDBC 4.0
 	public Reader getNCharacterStream(int parameterIndex) throws SQLException {
 		throw new UnsupportedOperationException();
 
 	}
 
-	//---- JDBC 4.0
 	public Reader getNCharacterStream(String parameterName) throws SQLException {
 		throw new UnsupportedOperationException();
 
 	}
 
-	//---- JDBC 4.0
 	public Reader getCharacterStream(int parameterIndex) throws SQLException {
 		throw new UnsupportedOperationException();
 
 	}
 
-	//---- JDBC 4.0
 	public Reader getCharacterStream(String parameterName) throws SQLException {
 		throw new UnsupportedOperationException();
 
 	}
 
-	//---- JDBC 4.0
 	public void setBlob(String parameterName, Blob x) throws SQLException {
 		throw new UnsupportedOperationException();
 
 	}
 
-	//---- JDBC 4.0
 	public void setClob(String parameterName, Clob x) throws SQLException {
 		actualStatement.setClob(parameterName, x);
 	}
 
-	//---- JDBC 4.0
 	public void setAsciiStream(String parameterName, InputStream x, long length) throws SQLException {
 		actualStatement.setAsciiStream(parameterName, x, length);
 	}
 
-	//---- JDBC 4.0
 	public void setBinaryStream(String parameterName, InputStream x, long length) throws SQLException {
 		actualStatement.setBinaryStream(parameterName, x, length);
 	}
 
-	//---- JDBC 4.0
 	public void setCharacterStream(String parameterName, Reader reader, long length) throws SQLException {
 		actualStatement.setCharacterStream(parameterName, reader);
 	}
 
-	//---- JDBC 4.0
 	public void setAsciiStream(String parameterName, InputStream x) throws SQLException {
 		actualStatement.setAsciiStream(parameterName, x);
 	}
 
-	//---- JDBC 4.0
 	public void setBinaryStream(String parameterName, InputStream x) throws SQLException {
 		actualStatement.setBinaryStream(parameterName, x);
 	}
 
-	//---- JDBC 4.0
 	public void setCharacterStream(String parameterName, Reader reader) throws SQLException {
 		actualStatement.setCharacterStream(parameterName, reader);
 	}
 
-	//---- JDBC 4.0
 	public void setNCharacterStream(String parameterName, Reader value) throws SQLException {
 		actualStatement.setNCharacterStream(parameterName, value);
 	}
 
-	//---- JDBC 4.0
 	public void setClob(String parameterName, Reader reader) throws SQLException {
 		actualStatement.setClob(parameterName, reader);
 	}
 
-	//---- JDBC 4.0
 	public void setBlob(String parameterName, InputStream inputStream) throws SQLException {
 		actualStatement.setBlob(parameterName, inputStream);
 	}
 
-	//---- JDBC 4.0
 	public void setNClob(String parameterName, Reader reader) throws SQLException {
 		actualStatement.setNClob(parameterName, reader);
 	}
 
-	//---- JDBC 4.0
+    //------------------------- JDBC 4.1 -----------------------------------
+
 	public <T> T getObject(int parameterIndex, Class<T> type) throws SQLException {
 		return actualStatement.getObject(parameterIndex, type);
 	}
 
-	//---- JDBC 4.0
 	public <T> T getObject(String parameterName, Class<T> type) throws SQLException {
 		return actualStatement.getObject(parameterName, type);
 	}
+
+    //----------------------- Wrapper interface ----------------------
+
+    public <T> T unwrap(Class<T> iface) throws SQLException {
+        throw new SQLException();
+
+    }
+
+    public boolean isWrapperFor(Class<?> iface) throws SQLException {
+        return false;
+    }
 
 }

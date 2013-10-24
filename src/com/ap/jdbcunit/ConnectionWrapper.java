@@ -121,13 +121,15 @@ public class ConnectionWrapper implements Connection {
         throw new UnsupportedOperationException();
     }
 
-   
+
 
 	public Connection wrappedConnection() {
 		return actualConnection;
 	}
 	
     Connection actualConnection;
+
+    //--------------------------JDBC 3.0-----------------------------
 
 	public int getHoldability() throws SQLException {
 		throw new UnsupportedOperationException();
@@ -141,11 +143,11 @@ public class ConnectionWrapper implements Connection {
 		throw new UnsupportedOperationException();
 	}
 
-	public void releaseSavepoint(Savepoint savepoint) throws SQLException {
-		throw new UnsupportedOperationException();
-	}
+    public void rollback(Savepoint savepoint) throws SQLException {
+        throw new UnsupportedOperationException();
+    }
 
-	public void rollback(Savepoint savepoint) throws SQLException {
+	public void releaseSavepoint(Savepoint savepoint) throws SQLException {
 		throw new UnsupportedOperationException();
 	}
 
@@ -177,116 +179,103 @@ public class ConnectionWrapper implements Connection {
 		throw new UnsupportedOperationException();
 	}
 
-	//---- JDBC 4.0
-	public <T> T unwrap(Class<T> iface) throws SQLException {
-		throw new UnsupportedOperationException();
-		
-	}
+    //--------------------------JDBC 4.0 -----------------------------
 
-	//---- JDBC 4.0
-	public boolean isWrapperFor(Class<?> iface) throws SQLException {
-		throw new UnsupportedOperationException();
-	}
-
-	//---- JDBC 4.0
 	public void setTypeMap(Map<String, Class<?>> map) throws SQLException {
 		throw new UnsupportedOperationException();
 		
 	}
 
-	//---- JDBC 4.0
 	public Clob createClob() throws SQLException {
 		throw new UnsupportedOperationException();
 		
 	}
 
-	//---- JDBC 4.0
 	public Blob createBlob() throws SQLException {
 		throw new UnsupportedOperationException();
 		
 	}
 
-	//---- JDBC 4.0
 	public NClob createNClob() throws SQLException {
 		throw new UnsupportedOperationException();
 		
 	}
 
-	//---- JDBC 4.0
 	public SQLXML createSQLXML() throws SQLException {
 		throw new UnsupportedOperationException();
 		
 	}
 
-	//---- JDBC 4.0
 	public boolean isValid(int timeout) throws SQLException {
 		throw new UnsupportedOperationException();
 	}
 
-	//---- JDBC 4.0
 	public void setClientInfo(String name, String value) throws SQLClientInfoException {
 		throw new UnsupportedOperationException();
 		
 	}
 
-	//---- JDBC 4.0
 	public void setClientInfo(Properties properties) throws SQLClientInfoException {
 		throw new UnsupportedOperationException();
 		
 	}
 
-	//---- JDBC 4.0
 	public String getClientInfo(String name) throws SQLException {
 		throw new UnsupportedOperationException();
 		
 	}
 
-	//---- JDBC 4.0
 	public Properties getClientInfo() throws SQLException {
 		throw new UnsupportedOperationException();
 		
 	}
 
-	//---- JDBC 4.0
 	public Array createArrayOf(String typeName, Object[] elements) throws SQLException {
 		throw new UnsupportedOperationException();
 		
 	}
 
-	//---- JDBC 4.0
 	public Struct createStruct(String typeName, Object[] attributes) throws SQLException {
 		throw new UnsupportedOperationException();
 		
 	}
 
-	//---- JDBC 4.0
+    //--------------------------JDBC 4.1 -----------------------------
+
 	public void setSchema(String schema) throws SQLException {
 		throw new UnsupportedOperationException();
 		
 	}
 
-	//---- JDBC 4.0
 	public String getSchema() throws SQLException {
 		throw new UnsupportedOperationException();
 		
 	}
 
-	//---- JDBC 4.0
 	public void abort(Executor executor) throws SQLException {
 		throw new UnsupportedOperationException();
 		
 	}
 
-	//---- JDBC 4.0
 	public void setNetworkTimeout(Executor executor, int milliseconds) throws SQLException {
 		throw new UnsupportedOperationException();
 		
 	}
 
-	//---- JDBC 4.0
 	public int getNetworkTimeout() throws SQLException {
 		throw new UnsupportedOperationException();
 		
 	}
-	
+
+    //----------------------- Wrapper interface ----------------------
+
+    public <T> T unwrap(Class<T> iface) throws SQLException {
+        throw new SQLException();
+
+    }
+
+    public boolean isWrapperFor(Class<?> iface) throws SQLException {
+        return false;
+    }
+
 }

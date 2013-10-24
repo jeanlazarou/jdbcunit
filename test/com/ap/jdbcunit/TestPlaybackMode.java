@@ -138,7 +138,8 @@ class MockDriver implements Driver {
 		return false;
 	}
 
-	//---- JDBC 4.0
+    //------------------------- JDBC 4.1 -----------------------------------
+
 	public Logger getParentLogger() throws SQLFeatureNotSupportedException {
 		throw new SQLFeatureNotSupportedException();
 	}
