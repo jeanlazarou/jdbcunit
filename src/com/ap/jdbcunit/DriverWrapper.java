@@ -9,11 +9,13 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.DriverPropertyInfo;
+import java.sql.SQLFeatureNotSupportedException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Iterator;
 import java.util.Properties;
+import java.util.logging.Logger;
 
 import com.ap.jdbcunit.playback.PlaybackConnection;;
 
@@ -88,4 +90,9 @@ public class DriverWrapper implements Driver {
 	}
 	
     static List registry = new ArrayList();
+    
+    //---- JDBC 4.0
+	public Logger getParentLogger() throws SQLFeatureNotSupportedException {
+		throw new SQLFeatureNotSupportedException();
+	}
 }

@@ -11,9 +11,10 @@ import java.sql.DriverPropertyInfo;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLFeatureNotSupportedException;
 import java.sql.Statement;
-
 import java.util.Properties;
+import java.util.logging.Logger;
 
 import com.ap.jdbcunit.util.JDBCUnitTestCase;
 
@@ -137,4 +138,9 @@ class MockDriver implements Driver {
 		return false;
 	}
 
+	//---- JDBC 4.0
+	public Logger getParentLogger() throws SQLFeatureNotSupportedException {
+		throw new SQLFeatureNotSupportedException();
+	}
+	
 }

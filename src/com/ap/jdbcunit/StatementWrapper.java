@@ -1,6 +1,6 @@
 /*
  * @author: Jean Lazarou
- * @date: 15 févr. 04
+ * @date: 15 fevr. 04
  */
 package com.ap.jdbcunit;
 
@@ -235,6 +235,41 @@ public class StatementWrapper implements Statement {
 	}
 
 	public boolean execute(String sql, String[] columnNames) throws SQLException {
+		throw new UnsupportedOperationException();
+	}
+
+	//---- JDBC 4.0
+	public <T> T unwrap(Class<T> iface) throws SQLException {
+		throw new UnsupportedOperationException();
+	}
+
+	//---- JDBC 4.0
+	public boolean isWrapperFor(Class<?> iface) throws SQLException {
+		throw new UnsupportedOperationException();
+	}
+
+	//---- JDBC 4.0
+	public boolean isClosed() throws SQLException {
+		throw new UnsupportedOperationException();
+	}
+
+	//---- JDBC 4.0
+	public void setPoolable(boolean poolable) throws SQLException {
+		throw new UnsupportedOperationException();
+	}
+
+	//---- JDBC 4.0
+	public boolean isPoolable() throws SQLException {
+		throw new UnsupportedOperationException();
+	}
+
+	//---- JDBC 4.0
+	public void closeOnCompletion() throws SQLException {
+		throw new UnsupportedOperationException();
+	}
+
+	//---- JDBC 4.0
+	public boolean isCloseOnCompletion() throws SQLException {
 		throw new UnsupportedOperationException();
 	}
 	

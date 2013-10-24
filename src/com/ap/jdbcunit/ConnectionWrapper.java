@@ -1,11 +1,27 @@
 /*
  * @author: Jean Lazarou
- * @date: 14 févr. 04
+ * @date: 14 fevr. 04
  */
 package com.ap.jdbcunit;
 
-import java.sql.*;
+import java.sql.Array;
+import java.sql.Blob;
+import java.sql.CallableStatement;
+import java.sql.Clob;
+import java.sql.Connection;
+import java.sql.DatabaseMetaData;
+import java.sql.NClob;
+import java.sql.PreparedStatement;
+import java.sql.SQLClientInfoException;
+import java.sql.SQLException;
+import java.sql.SQLWarning;
+import java.sql.SQLXML;
+import java.sql.Savepoint;
+import java.sql.Statement;
+import java.sql.Struct;
 import java.util.Map;
+import java.util.Properties;
+import java.util.concurrent.Executor;
 
 public class ConnectionWrapper implements Connection {
 	
@@ -22,7 +38,7 @@ public class ConnectionWrapper implements Connection {
     }
 
     public CallableStatement prepareCall(String sql) throws SQLException {
-        throw new UnsupportedOperationException();
+    	return new CallableStatementWrapper(this, sql, actualConnection.prepareCall(sql));
     }
 
     public String nativeSQL(String sql) throws SQLException {
@@ -105,9 +121,7 @@ public class ConnectionWrapper implements Connection {
         throw new UnsupportedOperationException();
     }
 
-    public void setTypeMap(Map map) throws SQLException {
-        throw new UnsupportedOperationException();
-    }
+   
 
 	public Connection wrappedConnection() {
 		return actualConnection;
@@ -161,6 +175,118 @@ public class ConnectionWrapper implements Connection {
 
 	public PreparedStatement prepareStatement(String sql, String[] columnNames) throws SQLException {
 		throw new UnsupportedOperationException();
+	}
+
+	//---- JDBC 4.0
+	public <T> T unwrap(Class<T> iface) throws SQLException {
+		throw new UnsupportedOperationException();
+		
+	}
+
+	//---- JDBC 4.0
+	public boolean isWrapperFor(Class<?> iface) throws SQLException {
+		throw new UnsupportedOperationException();
+	}
+
+	//---- JDBC 4.0
+	public void setTypeMap(Map<String, Class<?>> map) throws SQLException {
+		throw new UnsupportedOperationException();
+		
+	}
+
+	//---- JDBC 4.0
+	public Clob createClob() throws SQLException {
+		throw new UnsupportedOperationException();
+		
+	}
+
+	//---- JDBC 4.0
+	public Blob createBlob() throws SQLException {
+		throw new UnsupportedOperationException();
+		
+	}
+
+	//---- JDBC 4.0
+	public NClob createNClob() throws SQLException {
+		throw new UnsupportedOperationException();
+		
+	}
+
+	//---- JDBC 4.0
+	public SQLXML createSQLXML() throws SQLException {
+		throw new UnsupportedOperationException();
+		
+	}
+
+	//---- JDBC 4.0
+	public boolean isValid(int timeout) throws SQLException {
+		throw new UnsupportedOperationException();
+	}
+
+	//---- JDBC 4.0
+	public void setClientInfo(String name, String value) throws SQLClientInfoException {
+		throw new UnsupportedOperationException();
+		
+	}
+
+	//---- JDBC 4.0
+	public void setClientInfo(Properties properties) throws SQLClientInfoException {
+		throw new UnsupportedOperationException();
+		
+	}
+
+	//---- JDBC 4.0
+	public String getClientInfo(String name) throws SQLException {
+		throw new UnsupportedOperationException();
+		
+	}
+
+	//---- JDBC 4.0
+	public Properties getClientInfo() throws SQLException {
+		throw new UnsupportedOperationException();
+		
+	}
+
+	//---- JDBC 4.0
+	public Array createArrayOf(String typeName, Object[] elements) throws SQLException {
+		throw new UnsupportedOperationException();
+		
+	}
+
+	//---- JDBC 4.0
+	public Struct createStruct(String typeName, Object[] attributes) throws SQLException {
+		throw new UnsupportedOperationException();
+		
+	}
+
+	//---- JDBC 4.0
+	public void setSchema(String schema) throws SQLException {
+		throw new UnsupportedOperationException();
+		
+	}
+
+	//---- JDBC 4.0
+	public String getSchema() throws SQLException {
+		throw new UnsupportedOperationException();
+		
+	}
+
+	//---- JDBC 4.0
+	public void abort(Executor executor) throws SQLException {
+		throw new UnsupportedOperationException();
+		
+	}
+
+	//---- JDBC 4.0
+	public void setNetworkTimeout(Executor executor, int milliseconds) throws SQLException {
+		throw new UnsupportedOperationException();
+		
+	}
+
+	//---- JDBC 4.0
+	public int getNetworkTimeout() throws SQLException {
+		throw new UnsupportedOperationException();
+		
 	}
 	
 }
