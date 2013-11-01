@@ -1,6 +1,6 @@
 2013-10-31
   * moved project to GitHub
-  * merged changes from forked by Lais Oliveira (upgrade to Java 7, support for 
+  * merged changes from fork by Lais Oliveira (upgrade to Java 7, support for 
     CallableStatement, record timestamps)
   * switched to HSQL database for the tests
   
