@@ -1,68 +1,79 @@
 /*
  * @author: Jean Lazarou
- * @date: 15 févr. 04
+ * @date: 15 feb. 04
  */
 package com.ap.jdbcunit.util;
 
-import com.ap.straight.HashDatabase;
-import com.ap.straight.HashContainer;
-import com.ap.straight.HashTable;
+import org.hsqldb.jdbc.JDBCDriver;
 
-import java.math.BigDecimal;
 import java.sql.*;
+import java.util.Properties;
 
 public class DatabaseService {
-	
+
     public static void createDatabase() throws SQLException {
         createDatabase(true);
     }
 
     public static void createDatabase(boolean empty) throws SQLException {
 
-        HashDatabase db = new HashDatabase();
-
-        db.setName("TestDatabase");
-
-        HashContainer.add(db);
+        Connection con = connect();
 
         if (!empty) {
 
-            HashTable table;
+            Statement statement = con.createStatement();
 
-            table = new HashTable();
-            table.setName("Persons");
+            statement.execute("SET DATABASE DEFAULT TABLE TYPE MEMORY");
 
-            table.addColumn("Id", Integer.class);
-            table.addColumn("LastName", String.class);
-            table.addColumn("FirstName", String.class);
-            table.addColumn("LivesIn", Integer.class);
+            statement.execute(
+                    "CREATE TABLE Persons (" +
+                         "Id INTEGER," +
+                         "LastName VARCHAR(50)," +
+                         "FirstName VARCHAR(50), " +
+                         "LivesIn INTEGER " +
+                    ")"
+            );
 
-            db.add(table);
+            statement.execute(
+                    "CREATE TABLE Countries (" +
+                         "Id INTEGER," +
+                         "Name VARCHAR(50)" +
+                    ")"
+            );
 
-            table = new HashTable();
-            table.setName("Countries");
+            statement.execute(
+                    "CREATE TABLE Payroll (" +
+                            "Id INTEGER," +
+                            "Name VARCHAR(50)," +
+                            "HireDate TIMESTAMP," +
+                            "Salary DECIMAL" +
+                            ")"
+            );
 
-            table.addColumn("Id", Integer.class);
-            table.addColumn("Name", String.class);
+            fillTables(con);
 
-            db.add(table);
+            statement.close();
 
-			table = new HashTable();
-			table.setName("Payroll");
-
-			table.addColumn("Id", Integer.class);
-			table.addColumn("Name", String.class);
-			table.addColumn("HireDate", Date.class);
-			table.addColumn("Salary", BigDecimal.class);
-
-			db.add(table);
-
-            fillTables();
         }
+
+        con.close();
+
     }
 
-    public static void clear() {
-        HashContainer.clear();
+    public static void clear() throws SQLException {
+
+        Connection con = connect();
+
+        Statement statement = con.createStatement();
+
+        statement.execute("DROP TABLE Persons IF EXISTS");
+        statement.execute("DROP TABLE Countries IF EXISTS");
+        statement.execute("DROP TABLE Payroll IF EXISTS");
+
+        statement.close();
+
+        con.close();
+
     }
 
     public static boolean containsAllPersons(ResultSet rs) {
@@ -161,38 +172,54 @@ public class DatabaseService {
 
 	}
 
-    static void fillTables() throws SQLException {
-        Connection con = DriverManager.getConnection("jdbc:ap:TestDatabase");
+    static Connection connect() throws SQLException {
+
+        Properties info = new Properties();
+        JDBCDriver driver = new JDBCDriver();
+
+        return driver.connect("jdbc:hsqldb:mem:TestDatabase", info);
+
+    }
+
+    static void fillTables(Connection con) throws SQLException {
 
         insertPersons(con);
         insertCountries(con);
         insertPayrolls(con);
-        
+
     }
 
     static void insertPersons (Connection con) throws SQLException {
         Statement stmt = con.createStatement();
 
-        stmt.executeUpdate("INSERT INTO persons (1, 'LName1', 'FName1', 1)");
-        stmt.executeUpdate("INSERT INTO persons (2, 'LName2', 'FName2', 2)");
-        stmt.executeUpdate("INSERT INTO persons (3, 'LName3', 'FName3', 2)");
+        stmt.executeUpdate("INSERT INTO persons VALUES (1, 'LName1', 'FName1', 1)");
+        stmt.executeUpdate("INSERT INTO persons VALUES (2, 'LName2', 'FName2', 2)");
+        stmt.executeUpdate("INSERT INTO persons VALUES (3, 'LName3', 'FName3', 2)");
+
+        stmt.close();
+
     }
 
     static void insertCountries (Connection con) throws SQLException {
         Statement stmt = con.createStatement();
 
-        stmt.executeUpdate("INSERT INTO countries (1, 'Country1')");
-        stmt.executeUpdate("INSERT INTO countries (2, 'Country2')");
-        stmt.executeUpdate("INSERT INTO countries (3, 'Country3')");
+        stmt.executeUpdate("INSERT INTO countries VALUES (1, 'Country1')");
+        stmt.executeUpdate("INSERT INTO countries VALUES (2, 'Country2')");
+        stmt.executeUpdate("INSERT INTO countries VALUES (3, 'Country3')");
+
+        stmt.close();
+
     }
     
     static void insertPayrolls(Connection con) throws SQLException {
     	
         Statement stmt = con.createStatement();
 
-        stmt.executeUpdate("INSERT INTO payroll (1, 'Big', '2005-05-12', 6000)");
-        stmt.executeUpdate("INSERT INTO payroll (2, 'Small', '2003-08-04', 1200)");
-    
+        stmt.executeUpdate("INSERT INTO payroll VALUES (1, 'Big', '2005-05-12 00:00:00', 6000)");
+        stmt.executeUpdate("INSERT INTO payroll VALUES (2, 'Small', '2003-08-04 00:00:00', 1200)");
+
+        stmt.close();
+
     }
-    
+
 }

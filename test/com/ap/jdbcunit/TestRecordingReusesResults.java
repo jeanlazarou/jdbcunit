@@ -1,6 +1,6 @@
 /*
  * @author: Jean Lazarou
- * @date: 15 févr. 04
+ * @date: 15 fï¿½vr. 04
  */
 package com.ap.jdbcunit;
 
@@ -23,7 +23,7 @@ public class TestRecordingReusesResults extends JDBCUnitTestCase implements Reco
 
     public void testSelect() throws Exception {
 
-		JDBCUnit.start(this);
+        JDBCUnit.start(this);
 		
         JDBCUnit.record();
 
@@ -31,34 +31,36 @@ public class TestRecordingReusesResults extends JDBCUnitTestCase implements Reco
 
         rs = stmt.executeQuery("SELECT * FROM persons");
 
-		rs = stmt.executeQuery("SELECT * FROM persons");
+        rs = stmt.executeQuery("SELECT * FROM persons");
 
-		assertTrue(DatabaseService.containsAllPersons(rs));
+        assertTrue(DatabaseService.containsAllPersons(rs));
 
-		verify();
-		
-		JDBCUnit.stop();
+        verify();
+        
+        JDBCUnit.stop();
+        
     }
     
-	public void testPreparedSelect() throws Exception {
+    public void testPreparedSelect() throws Exception {
 
-		JDBCUnit.start(this);
-		
-		JDBCUnit.record();
+      JDBCUnit.start(this);
+      
+      JDBCUnit.record();
 
-		PreparedStatement pstmt = con.prepareStatement("SELECT * FROM persons");
-		
-		stmt = pstmt;
+      PreparedStatement pstmt = con.prepareStatement("SELECT * FROM persons");
+      
+      stmt = pstmt;
 
-		rs = pstmt.executeQuery();
+      rs = pstmt.executeQuery();
 
-		rs = pstmt.executeQuery();
+      rs = pstmt.executeQuery();
 
-		assertTrue(DatabaseService.containsAllPersons(rs));
+      assertTrue(DatabaseService.containsAllPersons(rs));
 
-		verify();
-		
-		JDBCUnit.stop();
+      verify();
+      
+      JDBCUnit.stop();
+      
 	}
     
 	public boolean existsTrack(String dbURL, String sql) {
@@ -76,7 +78,7 @@ public class TestRecordingReusesResults extends JDBCUnitTestCase implements Reco
 		count++;
 		
 		assertEquals(count, 2);
-		assertEquals(dbURL, "jdbc:ap:TestDatabase");
+		assertEquals(dbURL, "jdbc:hsqldb:mem:TestDatabase");
 		assertEquals(sql, "SELECT * FROM persons");
 		
 		List data = MemoryResultSet.toList(rs);

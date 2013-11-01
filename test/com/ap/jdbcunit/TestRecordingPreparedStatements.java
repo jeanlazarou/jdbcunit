@@ -42,7 +42,7 @@ public class TestRecordingPreparedStatements extends JDBCUnitTestCase implements
 		
 		JDBCUnit.record();
 
-		PreparedStatement pstmt = con.prepareStatement("INSERT INTO persons (?, ?, ?, ?)");
+		PreparedStatement pstmt = con.prepareStatement("INSERT INTO persons VALUES (?, ?, ?, ?)");
 		
 		stmt = pstmt;
 		
@@ -67,10 +67,10 @@ public class TestRecordingPreparedStatements extends JDBCUnitTestCase implements
 		count++;
 		
 		assertEquals(count, 1);
-		assertEquals(dbURL, "jdbc:ap:TestDatabase");
+		assertEquals(dbURL, "jdbc:hsqldb:mem:TestDatabase");
 		
 		if(sql.startsWith("INSERT")) {
-			assertEquals(sql, "INSERT INTO persons (777, 'Bond', 'James', 1)");
+			assertEquals(sql, "INSERT INTO persons VALUES (777, 'Bond', 'James', 1)");
 			assertOne(rs);		
 		} else {
 			assertEquals(sql, "SELECT * FROM persons WHERE id = 1");

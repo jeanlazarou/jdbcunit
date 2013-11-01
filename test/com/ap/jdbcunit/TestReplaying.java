@@ -1,6 +1,6 @@
 /*
  * @author: Jean Lazarou
- * @date: 15 févr. 04
+ * @date: 15 feb. 04
  */
 package com.ap.jdbcunit;
 
@@ -14,35 +14,36 @@ public class TestReplaying extends JDBCUnitTestCase {
 
     public void testSelect() throws Exception {
 
-		JDBCUnit.start(mockRecorder);
-		
+        JDBCUnit.start(mockRecorder);
+
         JDBCUnit.record();
 
         stmt = con.createStatement();
         rs = stmt.executeQuery("SELECT * FROM persons");
 
-		rs.close();
-		stmt.close();
-		
-		JDBCUnit.replay();
-		
-		stmt = con.createStatement();
-		rs = stmt.executeQuery("SELECT * FROM persons");
+        rs.close();
+        stmt.close();
 
-		assertSame(mockRecorder.getRecorded(), rs);
-				
-		mockRecorder.verify();
-		
-		JDBCUnit.stop();
+        JDBCUnit.replay();
+
+        stmt = con.createStatement();
+        rs = stmt.executeQuery("SELECT * FROM persons");
+
+        assertSame(mockRecorder.getRecorded(), rs);
+
+        mockRecorder.verify();
+
+        JDBCUnit.stop();
+
     }
 
-	protected void setUp() throws Exception {
-		super.setUp();
-		
-		mockRecorder = new PlaybackRecorder();
-		
-		mockRecorder.setExpectedSQL("SELECT * FROM persons");		
-	}
+    protected void setUp() throws Exception {
+        super.setUp();
 
-	PlaybackRecorder mockRecorder;
+        mockRecorder = new PlaybackRecorder();
+
+        mockRecorder.setExpectedSQL("SELECT * FROM persons");
+    }
+
+    PlaybackRecorder mockRecorder;
 }

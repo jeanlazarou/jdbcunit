@@ -1,6 +1,6 @@
 /*
  * @author: Jean Lazarou
- * @date: 15 févr. 04
+ * @date: 15 feb. 04
  */
 package com.ap.jdbcunit;
 
@@ -38,7 +38,7 @@ public class TestStatementWrapping extends JDBCUnitTestCase {
 
         stmt = con.createStatement();
 
-        int count = stmt.executeUpdate("INSERT INTO persons (777, 'Bond', 'James', 1)");
+        int count = stmt.executeUpdate("INSERT INTO persons VALUES (777, 'Bond', 'James', 1)");
 
         assertEquals(1, count);
 

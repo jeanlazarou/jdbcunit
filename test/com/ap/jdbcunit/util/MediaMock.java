@@ -111,9 +111,9 @@ public class MediaMock {
 
 	public void recordSelectPerson() {
 		
-		media.existsTrack("jdbc:ap:TestDatabase", "SELECT * FROM persons WHERE id = 1");
+		media.existsTrack("jdbc:hsqldb:mem:TestDatabase", "SELECT * FROM persons WHERE id = 1");
 		controller.setReturnValue(false);
-		media.newTrack("jdbc:ap:TestDatabase", "select * from persons where id=1", personColumns);
+		media.newTrack("jdbc:hsqldb:mem:TestDatabase", "select * from persons where id=1", personColumns);
 		media.write(Arrays.asList(new Object[] {new Integer(1), "LName1", "FName1", new Integer(1)}));
 		media.closeTrack();
 		
@@ -127,20 +127,20 @@ public class MediaMock {
 		result.add(personColumns);
 		
 		if (isRecording) {
-			media.existsTrack("jdbc:ap:TestDatabase", "SELECT * FROM persons WHERE id = 1");
+			media.existsTrack("jdbc:hsqldb:mem:TestDatabase", "SELECT * FROM persons WHERE id = 1");
 			controller.setReturnValue(true);
 		}
 		
-		media.getTrack("jdbc:ap:TestDatabase", "select * from persons where id=1");
+		media.getTrack("jdbc:hsqldb:mem:TestDatabase", "select * from persons where id=1");
 		controller.setReturnValue(result.iterator());
 		
 	}
 	
 	public void recordSelectPayroll() {
 	
-		media.existsTrack("jdbc:ap:TestDatabase", "SELECT * FROM payroll WHERE id = 1");
+		media.existsTrack("jdbc:hsqldb:mem:TestDatabase", "SELECT * FROM payroll WHERE id = 1");
 		controller.setReturnValue(false);
-		media.newTrack("jdbc:ap:TestDatabase", "select * from payroll where id=1", payrollColumns);
+		media.newTrack("jdbc:hsqldb:mem:TestDatabase", "select * from payroll where id=1", payrollColumns);
 		media.write(Arrays.asList(new Object[] {new Integer(1), "Big", Dates.createSQLDate(2005, 05, 12), new BigDecimal("6000")}));
 		media.closeTrack();
 		
@@ -154,11 +154,11 @@ public class MediaMock {
 		result.add(payrollColumns);
 	
 		if (isRecording) {
-			media.existsTrack("jdbc:ap:TestDatabase", "SELECT * FROM payroll WHERE id = 1");
+			media.existsTrack("jdbc:hsqldb:mem:TestDatabase", "SELECT * FROM payroll WHERE id = 1");
 			controller.setReturnValue(true);
 		}
 		
-		media.getTrack("jdbc:ap:TestDatabase", "select * from payroll where id=1");
+		media.getTrack("jdbc:hsqldb:mem:TestDatabase", "select * from payroll where id=1");
 		controller.setReturnValue(result.iterator());
 		
 	}
@@ -167,10 +167,10 @@ public class MediaMock {
 		
 		if (isRecording) {
 			
-			media.newTrack("jdbc:ap:TestDatabase", "insert into persons(7,'James','Bond',1)", insertColumns);
+			media.newTrack("jdbc:hsqldb:mem:TestDatabase", "insert into persons(7,'James','Bond',1)", insertColumns);
 			media.write(Arrays.asList(new Object[] {new Integer(1)}));
 			media.closeTrack();
-			
+
 			addAsRecorded(ROW_FOR_INSERT_PERSON);
 			
 		} else {
@@ -179,7 +179,7 @@ public class MediaMock {
 			result.add(insertColumns);
 			result.add(oneInsert);
 
-			media.getTrack("jdbc:ap:TestDatabase", "insert into persons(7,'James','Bond',1)");
+			media.getTrack("jdbc:hsqldb:mem:TestDatabase", "insert into persons(7,'James','Bond',1)");
 			controller.setReturnValue(result.iterator());
 		}
 		
@@ -189,7 +189,7 @@ public class MediaMock {
 
 		if (isRecording) {
 
-			media.newTrack("jdbc:ap:TestDatabase", "insert into payroll(7,'Average','2009-05-12',3700)", insertColumns);
+			media.newTrack("jdbc:hsqldb:mem:TestDatabase", "insert into payroll(7,'Average','2009-05-12',3700)", insertColumns);
 			media.write(Arrays.asList(new Object[] {new Integer(1)}));
 			media.closeTrack();
 			
@@ -201,7 +201,7 @@ public class MediaMock {
 			result.add(insertColumns);
 			result.add(oneInsert);
 
-			media.getTrack("jdbc:ap:TestDatabase", "insert into payroll(7,'Average','2009-05-12',3700)");
+			media.getTrack("jdbc:hsqldb:mem:TestDatabase", "insert into payroll(7,'Average','2009-05-12',3700)");
 			controller.setReturnValue(result.iterator());
 			
 		}
@@ -229,16 +229,16 @@ public class MediaMock {
 
 	Stack recorded = new Stack();
 	
-	static final List ROW_FOR_PERSONS = Arrays.asList(new Object[] {"jdbc:ap:TestDatabase", "SELECT * FROM persons WHERE id = 1", new Integer(1), new Integer(1), Boolean.FALSE});
-	static final List ROW_FOR_INSERT_PERSON = Arrays.asList(new Object[] {"jdbc:ap:TestDatabase", "INSERT INTO persons (7, 'James', 'Bond', 1)", new Integer(2), new Integer(2), Boolean.TRUE});
-	static final List ROW_FOR_PAYROLL = Arrays.asList(new Object[] {"jdbc:ap:TestDatabase", "SELECT * FROM payroll WHERE id = 1", new Integer(1), new Integer(1), Boolean.FALSE});
-	static final List ROW_FOR_INSERT_PAYROLL = Arrays.asList(new Object[] {"jdbc:ap:TestDatabase", "INSERT INTO payroll (7, 'Average', '2009-05-12',3700)", new Integer(2), new Integer(2), Boolean.TRUE});
+	static final List ROW_FOR_PERSONS = Arrays.asList(new Object[] {"jdbc:hsqldb:mem:TestDatabase", "SELECT * FROM persons WHERE id = 1", new Integer(1), new Integer(1), Boolean.FALSE});
+	static final List ROW_FOR_INSERT_PERSON = Arrays.asList(new Object[] {"jdbc:hsqldb:mem:TestDatabase", "INSERT INTO persons (7, 'James', 'Bond', 1)", new Integer(2), new Integer(2), Boolean.TRUE});
+	static final List ROW_FOR_PAYROLL = Arrays.asList(new Object[] {"jdbc:hsqldb:mem:TestDatabase", "SELECT * FROM payroll WHERE id = 1", new Integer(1), new Integer(1), Boolean.FALSE});
+	static final List ROW_FOR_INSERT_PAYROLL = Arrays.asList(new Object[] {"jdbc:hsqldb:mem:TestDatabase", "INSERT INTO payroll (7, 'Average', '2009-05-12',3700)", new Integer(2), new Integer(2), Boolean.TRUE});
 
 
 	static final List oneInsert = Arrays.asList(new Object[] {new Integer(1)});
 	static final List insertColumns = Arrays.asList(new Object[] {"count"});
-	static final List personColumns = Arrays.asList(new Object[] {"id", "lastname", "firstname", "livesin"});
-	static final List payrollColumns = Arrays.asList(new Object[] {"id", "name", "hiredate", "salary"});
+	static final List personColumns = Arrays.asList(new Object[] {"ID", "LASTNAME", "FIRSTNAME", "LIVESIN"});
+	static final List payrollColumns = Arrays.asList(new Object[] {"ID", "NAME", "HIREDATE", "SALARY"});
 
 	static final List sequencerColumns = Arrays.asList(new Object[] {"dbUrl", "sql", "version", "frame", "isUpdate"});
 

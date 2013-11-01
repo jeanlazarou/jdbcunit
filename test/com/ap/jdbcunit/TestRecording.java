@@ -1,6 +1,6 @@
 /*
  * @author: Jean Lazarou
- * @date: 15 févr. 04
+ * @date: 15 feb. 04
  */
 package com.ap.jdbcunit;
 
@@ -31,7 +31,7 @@ public class TestRecording extends JDBCUnitTestCase implements Recorder {
 		JDBCUnit.stop();
     }
 
-    public void testInsertStatment() throws Exception {
+    public void testInsertStatement() throws Exception {
 
 		JDBCUnit.start(this);
 		
@@ -39,7 +39,7 @@ public class TestRecording extends JDBCUnitTestCase implements Recorder {
 
         stmt = con.createStatement();
 
-        stmt.executeUpdate("INSERT INTO persons (777, 'Bond', 'James', 1)");
+        stmt.executeUpdate("INSERT INTO persons VALUES (777, 'Bond', 'James', 1)");
 
 		verify();
 		
@@ -47,7 +47,7 @@ public class TestRecording extends JDBCUnitTestCase implements Recorder {
 
     }
 
-    public void _testDeleteStatment() throws Exception {
+    public void testDeleteStatement() throws Exception {
 
 		JDBCUnit.start(this);
 		
@@ -55,7 +55,7 @@ public class TestRecording extends JDBCUnitTestCase implements Recorder {
 
         stmt = con.createStatement();
 
-        stmt.executeUpdate("DELETE * FROM persons WHERE Id = 1");
+        stmt.executeUpdate("DELETE FROM persons WHERE Id = 1");
 
 		verify();
 		
@@ -72,13 +72,13 @@ public class TestRecording extends JDBCUnitTestCase implements Recorder {
 		count++;
 		
 		assertEquals(count, 1);
-		assertEquals(dbURL, "jdbc:ap:TestDatabase");
+		assertEquals(dbURL, "jdbc:hsqldb:mem:TestDatabase");
 		
 		if (sql.startsWith("INSERT")) {
-			assertEquals(sql, "INSERT INTO persons (777, 'Bond', 'James', 1)");
+			assertEquals(sql, "INSERT INTO persons VALUES (777, 'Bond', 'James', 1)");
 			assertOne(rs);
 		} else if (sql.startsWith("DELETE")) {
-			assertEquals(sql, "DELETE * FROM persons WHERE Id = 1");
+			assertEquals(sql, "DELETE FROM persons WHERE Id = 1");
 			assertOne(rs);
 		} else {
 			assertEquals(sql, "SELECT * FROM persons");

@@ -1,6 +1,6 @@
 /*
  * @author: Jean Lazarou
- * @date: 15 févr. 04
+ * @date: 15 feb. 04
  */
 package com.ap.jdbcunit;
 
@@ -102,8 +102,8 @@ public class SelectsMediaRecorder implements Recorder {
 					row.add(rs.getObject(i));
 				}
 
-				media.write(row);
-    			
+                media.write(row);
+
 			}
 			
 			media.closeTrack();

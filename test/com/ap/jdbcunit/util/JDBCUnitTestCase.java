@@ -1,17 +1,17 @@
 /*
  * @author: Jean Lazarou
- * @date: 15 févr. 04
+ * @date: 15 feb. 04
  */
 package com.ap.jdbcunit.util;
 
+import com.ap.straight.MemoryResultSet;
 import junit.framework.AssertionFailedError;
 import junit.framework.TestCase;
 
 import com.ap.jdbcunit.DriverWrapper;
 import com.ap.jdbcunit.JDBCUnit;
 import com.ap.jdbcunit.Recorder;
-import com.ap.straight.HashDriver;
-import com.ap.straight.MemoryResultSet;
+import org.hsqldb.jdbc.JDBCDriver;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -46,7 +46,7 @@ public class JDBCUnitTestCase extends TestCase {
 			count++;
 		
 			assertEquals(count, 1);
-			assertEquals(dbURL, "jdbc:ap:TestDatabase");
+			assertEquals(dbURL, "jdbc:hsqldb:mem:TestDatabase");
 			assertEquals(expectedSQL, sql);
 		
 			recorded = MemoryResultSet.create(rs);
@@ -81,7 +81,7 @@ public class JDBCUnitTestCase extends TestCase {
 	
     protected void setUp() throws Exception {
 
-		HashDriver driver = new HashDriver();
+        JDBCDriver driver = new JDBCDriver();
 
 		DriverManager.registerDriver(driver);
 
@@ -89,7 +89,7 @@ public class JDBCUnitTestCase extends TestCase {
 
         JDBCUnit.registerDriver(driver);
 
-        con = DriverManager.getConnection("jdbc:ap:TestDatabase");
+        con = DriverManager.getConnection("jdbc:hsqldb:mem:TestDatabase");
     }
 
     protected void tearDown() throws Exception {
@@ -97,8 +97,8 @@ public class JDBCUnitTestCase extends TestCase {
         if (rs != null) rs.close();
         if (stmt != null) stmt.close();
         if (con != null) con.close();
-        
-		DatabaseService.clear();
+
+        DatabaseService.clear();
 		DriverWrapper.deregisterDrivers();
 		
 		JDBCUnit.reset();

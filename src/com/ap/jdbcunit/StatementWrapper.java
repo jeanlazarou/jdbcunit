@@ -1,6 +1,6 @@
 /*
  * @author: Jean Lazarou
- * @date: 15 fevr. 04
+ * @date: 15 feb. 04
  */
 package com.ap.jdbcunit;
 
@@ -110,12 +110,12 @@ public class StatementWrapper implements Statement {
     }
 
     public boolean execute(String sql) throws SQLException {
-		if (JDBCUnit.isRecording()) System.out.println("JDBCUnit WARN: execute(String sql) is not recorded");
+		if (JDBCUnit.isRecording()) System.out.println("JDBCUnit WARN: execute(String sql) is not recorded (StatementWrapper)");
         return actualStatement.execute(sql);
     }
 
     public ResultSet getResultSet() throws SQLException {
-		if (JDBCUnit.isRecording()) System.out.println("JDBCUnit WARN: getResultSet() is not recorded");
+		if (JDBCUnit.isRecording()) System.out.println("JDBCUnit WARN: getResultSet() is not recorded (StatementWrapper)");
         return actualStatement.getResultSet();
     }
 
@@ -160,7 +160,7 @@ public class StatementWrapper implements Statement {
     }
 
     public int[] executeBatch() throws SQLException {
-		if (JDBCUnit.isRecording()) System.out.println("JDBCUnit WARN: executeBatch() is not recorded");
+		if (JDBCUnit.isRecording()) System.out.println("JDBCUnit WARN: executeBatch() is not recorded (StatementWrapper)");
         return actualStatement.executeBatch();
     }
 

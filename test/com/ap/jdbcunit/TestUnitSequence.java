@@ -159,10 +159,10 @@ public class TestUnitSequence extends JDBCUnitTestCase {
 	
 	private void recordSequence(Media media) {
 		
-		media.existsTrack("jdbc:ap:TestDatabase", "select * from persons");
+		media.existsTrack("jdbc:hsqldb:mem:TestDatabase", "select * from persons");
 		control.setDefaultReturnValue(false);
 		
-		media.newTrack("jdbc:ap:TestDatabase", "select * from persons", Lists.toList(new String[] {"id", "lastname", "firstname", "livesin"}));
+		media.newTrack("jdbc:hsqldb:mem:TestDatabase", "select * from persons", Lists.toList(new String[] {"ID", "LASTNAME", "FIRSTNAME", "LIVESIN"}));
 		control.setVoidCallable();
 		
 		media.write(Lists.toList(new Object[] {new Integer(1), "LName1", "FName1", new Integer(1)}));
@@ -204,7 +204,7 @@ public class TestUnitSequence extends JDBCUnitTestCase {
 		data.add(Lists.toList(new Object[] {new Integer(2), "LName2", "FName2", new Integer(2)}));
 		data.add(Lists.toList(new Object[] {new Integer(3), "LName3", "FName3", new Integer(2)}));
 		
-		media.getTrack("jdbc:ap:TestDatabase", "select * from persons");
+		media.getTrack("jdbc:hsqldb:mem:TestDatabase", "select * from persons");
 		control.setReturnValue(data.iterator());
 
 	}
